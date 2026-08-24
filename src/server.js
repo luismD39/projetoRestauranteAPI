@@ -48,19 +48,3 @@ app.listen(PORT, ()=> {
     console.log("Servidor rodando na porta 3001.")
 })
 
-//CARDAPIO
-app.get("/cardapio", async (req, res) =>{
-    try {
-        
-        const {descricao, categoria, preco, imagem} = req.body
-        const sql = "SELECT * FROM produto"
-        const result = await db.execute(sql)
-
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({
-            mensagem:"Erro ao listar produtos!"
-        })
-    }
-})
-
