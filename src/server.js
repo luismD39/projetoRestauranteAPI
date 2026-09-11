@@ -16,7 +16,7 @@ app.get("/", (req,res) => {
     })
 })
 
-app.get("/produto", async (req, res)=>{
+app.get("/produtos", async (req, res)=>{
     try {
         const [produtos] = await db.query("SELECT * FROM produto")
 
@@ -26,7 +26,7 @@ app.get("/produto", async (req, res)=>{
     }
 })
 
-app.post("/produto", async (req,res)=>{
+app.post("/produtos", async (req,res)=>{
     try {
 
         const {descricao, categoria, preco, imagem} = req.body
