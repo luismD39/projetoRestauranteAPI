@@ -16,6 +16,16 @@ app.get("/", (req,res) => {
     })
 })
 
+app.get("/produto", async (req, res)=>{
+    try {
+        const [produtos] = await db.query("SELECT * FROM produto")
+
+        res.json(produtos)
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 app.post("/produto", async (req,res)=>{
     try {
 
@@ -42,6 +52,21 @@ app.post("/produto", async (req,res)=>{
         })
     }
 
+})
+
+app.delete("/produtos/:id", async(req,res) => {
+    try {
+        const {id} = req.params
+        await db.query ("DELETE FROM produto WHERE id = ?", [id])
+
+        res.json({mensagem:"Produto deletado com sucesso."})
+
+    } catch (error) {
+        console.log(error)
+        res.json({
+            erro: "Erro ao deletar produto"
+        })
+    }
 })
 
 app.listen(PORT, ()=> {
