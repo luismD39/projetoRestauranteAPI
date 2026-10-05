@@ -35,7 +35,7 @@ app.post("/registrar", async (req,res)=>{
         )
 
         if(usuarioExistente.length > 0){
-            return res.status(400)({
+            return res.status(400).json({
                 mensagem: "E-mail já cadastrado"
             })
         }
@@ -46,6 +46,10 @@ app.post("/registrar", async (req,res)=>{
             "INSERT INTO usuario(nome,email,senha) VALUES(?,?,?)",
             [nome, email, senhaHash]
         )
+
+        return res.status(201).json({
+            mensagem: "Usuário cadastrado com sucesso!"
+        })
 
     } catch (error) {
         console.log(error)
